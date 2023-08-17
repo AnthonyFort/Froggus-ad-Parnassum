@@ -75,8 +75,8 @@ function startGame () {
   frog2 = document.createElement('div')
   frog1.classList.add('frog')
   frog2.classList.add('frog')
-  frog1.setAttribute('id','frog1')
-  frog2.setAttribute('id','frog2')
+  frog1.setAttribute('id','frog-left')
+  frog2.setAttribute('id','frog-right')
   grid.appendChild(frog1)
   grid.appendChild(frog2)
   availableKeys = ['d', ';'] // Sets initial values for the start of the game

@@ -19,6 +19,10 @@ h3 {
 
 li {
   font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  color: indigo;
+}
+
+.menu-item {
   font-weight: bold;
 }
 
@@ -50,6 +54,7 @@ li {
   border-radius: 4px;
   padding-left: 5px;
   padding-right: 5px;
+  margin-bottom: 45px;
 }
 
 #key-guide {
