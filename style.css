@@ -7,19 +7,29 @@ body {
   background-color: green;
 }
 
+#start-button {
+  font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  border-radius: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin-bottom: 40px;
+  cursor: pointer;
+}
+
+/* Information tabs on left-hand side of screen */
+
 #information {
   position: absolute;
   left: 2%;
   top: 34.5%;
 }
 
-h3 {
-  text-align: center;
-}
-
-li {
-  font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-  color: indigo;
+#menu {
+  box-shadow: 0 0 10px grey;
+  padding: 3px 35px 3px 3px;
+  border-radius: 4px;
+  background-color: turquoise;
+  opacity: 0.7;
 }
 
 .menu-item {
@@ -28,7 +38,7 @@ li {
 }
 
 .nav-content {
-  color:indigo;
+  color: indigo;
   display: none;
   width: 105px;
   font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
@@ -42,29 +52,32 @@ li {
   width: 400px;
 }
 
-#menu {
+/* <li> tag used for both information section and highscores */
+
+li {
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  color: indigo;
+}
+
+/* More highscore features */
+
+h3 {
+  text-align: center;
+}
+
+#highscores {
+  position: absolute;
+  right: 6%;
+  top: 34.5%;
   box-shadow: 0 0 10px grey;
   padding: 3px 35px 3px 3px;
   border-radius: 4px;
   background-color: turquoise;
   opacity: 0.7;
+  color:indigo;
 }
 
-#start-button {
-  font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-  border-radius: 4px;
-  padding-left: 5px;
-  padding-right: 5px;
-  margin-bottom: 40px;
-  cursor: pointer;
-}
-
-#key-guide {
-  display: none;
-  gap: 2px;
-  width: auto;
-  grid-template-columns: repeat(8, 1fr);
-}
+/* Grid */
 
 #grid {
  position: relative;
@@ -77,6 +90,15 @@ li {
  border-radius: 4px;
 }
 
+/* Features for the key guide that sits above the grid */
+
+#key-guide {
+  display: none;
+  gap: 2px;
+  width: auto;
+  grid-template-columns: repeat(8, 1fr);
+}
+
 .guide {
   width: 50px;
   height: 40px;
@@ -87,6 +109,29 @@ li {
   opacity: 0.3;
   border-radius: 4px;
 }
+
+/* Endscreen features */
+
+#endscreen {
+  display: inline-block;
+  background-image: linear-gradient(#20e80e, turquoise);
+  position: absolute;
+  top: 240px;
+  box-shadow: 0 0 10px grey;
+  width: 416px;
+  height: 364px;
+  border-radius: 4px; 
+}
+
+#end-text {
+  width: 100%;
+  text-align: center;
+  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+  font-size: 80px;
+  padding: 5px;
+}
+
+/* Visual features of grid, including animals */
 
 .square {
   width: 0px;
@@ -125,26 +170,7 @@ li {
   right: 15px;
 }
 
-#endscreen {
-  display: inline-block;
-  background-image: linear-gradient(#20e80e, turquoise);
-  position: absolute;
-  top: 240px;
-  box-shadow: 0 0 10px grey;
-  width: 416px;
-  height: 364px;
-  border-radius: 4px;
-  
-}
-
-#end-text {
-  width: 100%;
-  text-align: center;
-  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
-  font-size: 80px;
-  padding: 5px;
-  
-}
+/* Large frog body parts */
 
 .mouth {
   display: none;
@@ -160,7 +186,7 @@ li {
 }
 
 #frown {
-    transform: scaleY(-1);
+  transform: scaleY(-1);
 }
 
 #frog-body {
@@ -194,16 +220,4 @@ li {
 #arm2 {
   right: 21%;
   transform: rotate(270deg);
-}
-
-#highscores {
-  position: absolute;
-  right: 6%;
-  top: 34.5%;
-  box-shadow: 0 0 10px grey;
-  padding: 3px 35px 3px 3px;
-  border-radius: 4px;
-  background-color: turquoise;
-  opacity: 0.7;
-  color:indigo;
 }

@@ -82,6 +82,7 @@ function startGame () {
   availableKeys = ['d', ';'] // Sets initial values for the start of the game
   currentRow = 0 
   frogLives = 2
+  livesText.innerHTML = '🐸🐸'
   frogLocation = []
   gridMade = false // Ensures that it will be possible to execute the createGrid function
   keyGuideMade = false
