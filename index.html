@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <script defer src="app.js"></script>
+  <title>Froggus</title>
+  <link rel="icon" href="favicon_io/favicon-16x16.png">
+</head>
+<body>
+  <h1 id="h1">FROGGUS AD PARNASSUM!</h1>
+  <button id="start-button">Click to Start!</button>
+  <h2 id="countdown-text"></h2>
+  <div id="key-guide">
+    <div id="guide1" class="guide">d</div>
+    <div id="guide2" class="guide">f</div>
+    <div id="guide3" class="guide">g</div>
+    <div id="guide4" class="guide">h</div>
+    <div id="guide5" class="guide">j</div>
+    <div id="guide6" class="guide">k</div>
+    <div id="guide7" class="guide">l</div>
+    <div id="guide8" class="guide">;</div>
+  </div>
+  <div id="grid">
+    <div id="frog1" class="frog"></div>
+    <div id="frog2" class="frog"></div>
+  </div>
+  <div id="endscreen">
+    <p id="end-text"></p>
+  </div>
+  <div id="smile"></div>
+  <div id="frown"></div>
+  <div id="frog-body"></div>
+  <div id="arm1" class="arms"></div>
+  <div id="arm2" class="arms"></div>
+  <section id="information">
+    <nav id="menu">
+      <li><a href="" id="about" class="menu-item">About</a></li>
+      <div id="about-content" class="nav-content">This game is a cross between the classic arcade game Frogger and an exercise from Johann Joseph Fux’s classical composition guide “Gradus ad Parnassum”. It requires the player to press two keys at a time in a coordinated fashion, and, in so doing, simulates playing a musical keyboard. Musical improvisation requires quick thinking, so you can use this game to train your quick-thinking abilities by racing the clock and getting a high score!</div>
+      <li><a href="" id="aim" class="menu-item">Aim</a></li>
+      <div id="aim-content" class="nav-content">The aim of the game is move two frogs across the river to the lily pads on the other side as quickly as possible. After the first go, the frogs will automatically move upwards each turn, and it’s your job to decide where they are to be positioned on the next row by pressing particular keys. Fux laid out certain rules about how wide apart musical notes (or frogs) can be, so read the “rules” section for more information. Oh, and watch out for the sharks!</div>
+      <li><a href="" id="rules" class="menu-item">Rules</a></li>
+      <div id="rules-content" class="nav-content">
+        <ul>
+          <li>In the top and bottom rows, the interval (the gap between the frogs) must be 8 keys (counting inclusively).</li>
+          <li>In the second to last tow, you must land on the lily pads.</li>
+          <li>In the middle rows, the intervals must be either 3 or 6 (inclusive).</li>
+          <li>On one occasion of your choosing, you are allowed to make an interval of 5 or 8 in the middle rows. If you do this more than once, the game will be over.</li>
+          <li>Time starts as soon as you play the first move. For the first move, the frogs will remain where they are.</li>
+        </ul>
+      </div>
+      <li><a href="" id="demonstration" class="menu-item">Demonstration</a></li>
+    </nav>
+  </section>
+  <section id="highscores">
+    <h3>High Scores!</h3>
+      <ol>
+        <li id="list0"></li>
+        <li id="list1"></li>
+        <li id="list2"></li>
+        <li id="list3"></li>
+        <li id="list4"></li>
+        <li id="list5"></li>
+        <li id="list6"></li>
+        <li id="list7"></li>
+        <li id="list8"></li>
+        <li id="list9"></li>
+      </ol>
+  </section>
+</body>
+</html>
