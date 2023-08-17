@@ -11,6 +11,7 @@
 <body>
   <h1 id="h1">FROGGUS AD PARNASSUM!</h1>
   <button id="start-button">Click to Start!</button>
+  <!-- The key guide is a visual guideline that helps the player choose which key to press -->
   <div id="key-guide">
     <div id="guide1" class="guide">d</div>
     <div id="guide2" class="guide">f</div>
@@ -21,6 +22,7 @@
     <div id="guide7" class="guide">l</div>
     <div id="guide8" class="guide">;</div>
   </div>
+  <!-- The grid will be constructed dynamically in JavaScipt, and is where the game will be played -->
   <div id="grid">
     <div id="frog-left" class="frog"></div>
     <div id="frog-right" class="frog"></div>
@@ -28,11 +30,13 @@
   <div id="endscreen">
     <p id="end-text"></p>
   </div>
+  <!-- These are various elements of a large frog body, and will be positioned relative to the page body -->
   <div id="smile" class="mouth"></div>
   <div id="frown" class="mouth"></div>
   <div id="frog-body"></div>
   <div id="arm1" class="arms"></div>
   <div id="arm2" class="arms"></div>
+  <!-- The information section contains information about the game for the player to read -->
   <section id="information">
     <nav id="menu">
       <li>
@@ -60,6 +64,7 @@
       </li>
     </nav>
   </section>
+  <!-- The highscores section displays the top ten high scores -->
   <section id="highscores">
     <h3>High Scores!</h3>
       <ol>
@@ -75,6 +80,7 @@
         <li id="list9"></li>
       </ol>
   </section>
+  <!-- This p tag displays how many 'lives' the player has remaining -->
   <p id="lives"></p>
 </body>
 </html>
