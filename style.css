@@ -113,12 +113,12 @@ li {
   transition: 1s;
 }
 
-#frog1 {
+#frog-left {
   bottom: 15px;
   left: 15px;
 }
 
-#frog2 {
+#frog-right {
   bottom: 15px;
   right: 15px;
 }
