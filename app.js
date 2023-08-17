@@ -58,7 +58,7 @@ for (let i = 1; i < 9; i++) {
   soundArray.push(audio)
 }
 
-showTopScores() // Automatically calling this function
+showTopScores() // Automatically calling this function to ensure that the highscores are always visible as soon as the page has loaded
 
 function startGame () {
   smile.style.display = 'none' // Hides features of the endScreen once the game starts
@@ -85,6 +85,8 @@ function startGame () {
   hideText ()
 }
 
+// Create a dynamic grid with CSS and JS
+
 function createGrid (width, height) {
   if (gridMade === false) {
     grid.style.gridTemplateRows = `repeat(${height}, 1fr)`
@@ -102,10 +104,45 @@ function createGrid (width, height) {
   gridMade = true
 }
 
+// The next 3 functions combine to randomly mark 5 keys as valid and 3 keys as invalid (all keys being selected from the originalGridWidth array)
+// Following musical convention, the keys for the first row, the last row, and the row before last are predetermined
+// Therefore, randomness will only be introduced in the middle rows
 
+function changeAvailableKeys () {
+  if (currentRow === 0 || currentRow === gridHeight - 1) {
+    availableKeys = ['d', ';']
+  }
+  else if (currentRow === gridHeight - 2) {
+    availableKeys = ['f', 'l']
+  }
+  else if (currentRow > 0 && currentRow < gridHeight - 2) {
+    availableKeys = []
+    makeRandomRow ()
+  }  
+}
+
+// makeRandomRow uses recursion to fill the availableKeys array with 5 unique keys from originalGridWidth
+// when this function has finished, it calls createSharks
+
+function makeRandomRow () {
+  let randomNum = (Math.floor(Math.random() * originalGridWidth.length))
+  if (!availableKeys.includes(originalGridWidth[randomNum]) && availableKeys.length < 5) {
+    availableKeys.push(originalGridWidth[randomNum])
+    makeRandomRow ()
+  } else if (availableKeys.includes(originalGridWidth[randomNum]) && availableKeys.length < 5) {
+    makeRandomRow ()
+  }
+  else if (availableKeys.length === 5) {
+    createSharks()
+  }
+}
+
+// createSharks creates an array containing all the elements of originalGridWidth that were NOT selected for the availableKeys array
+// Once made, createSharks targets specific squares on a row and styles them with the CSS class "shark"
+// At the start of createSharks, any sharks from the previous go are removed
 
 function createSharks () {
-  let removeCurrentSharks = document.querySelectorAll('.shark')
+  let removeCurrentSharks = document.querySelectorAll('.shark') 
   removeCurrentSharks.forEach(item => {
     item.classList.remove('shark')
   })
@@ -124,31 +161,10 @@ function createSharks () {
   })
 }
 
-function makeRandomRow () {
-  let randomNum = (Math.floor(Math.random() * originalGridWidth.length))
-  if (!availableKeys.includes(originalGridWidth[randomNum]) && availableKeys.length < 5) {
-    availableKeys.push(originalGridWidth[randomNum])
-    makeRandomRow ()
-  } else if (availableKeys.includes(originalGridWidth[randomNum]) && availableKeys.length < 5) {
-    makeRandomRow ()
-  }
-  else if (availableKeys.length === 5) {
-    createSharks()
-  }
-}
-
-function changeAvailableKeys () {
-  if (currentRow === 0 || currentRow === gridHeight - 1) {
-    availableKeys = ['d', ';']
-  }
-  else if (currentRow === gridHeight - 2) {
-    availableKeys = ['f', 'l']
-  }
-  else if (currentRow > 0 && currentRow < gridHeight - 2) {
-    availableKeys = []
-    makeRandomRow ()
-  }  
-}
+// checkMove checks the validity of the latest move.
+// It receives individual key presses as arguments and uses those arguments to fill up the currentMove array
+// The rest of the function only executes once currentMoves.length === 2
+// This function also updates several variables, including: startTime, currentRow, frogLives
 
 function checkMove (event) {
   if (availableKeys.includes(event.key)){
@@ -156,7 +172,7 @@ function checkMove (event) {
     if (currentMove.length === 2) {
       if (currentRow === 0 ) {
         startTime = new Date ()
-        startTime = startTime.getTime()
+        startTime = startTime.getTime() // The starts a timer from the moment player takes their first move
         currentRow++
       } 
       else if (currentRow > 0 && currentRow < gridHeight - 2) {
@@ -177,14 +193,14 @@ function checkMove (event) {
       else if (currentRow === gridHeight - 1) {
         currentRow++
         stopTime = new Date ()
-        stopTime = stopTime.getTime()
+        stopTime = stopTime.getTime() // Records what time the player completed the game
         winScreen()
-        setTimeout(calculateTime, 1000)
+        setTimeout(calculateTime, 1000) // This timeout is to ensure that the highscore prompt doesn't load too quickly after the game has finished
       }
       else {
         loseScreen()
       } 
-      changeAvailableKeys()
+      changeAvailableKeys() // Calling changeAvailableKeys here ensures that a new set of availableKeys is generated for each of the middle rows
     }
   }
   else {
@@ -192,16 +208,26 @@ function checkMove (event) {
   }  
 }
 
+// emptyCurrentMove was implemented to ensure that the player holds down two keys at once, as if they are actually playing a musical keyboard
+// This function is triggered by a 'keyup'. If a player presses one key first, and then lifts up that key befores adding their second key, the currentMoves array will be emptied and they will have to make that move again
+
 function emptyCurrentMove () {
   currentMove = []
 }
+
+// lifeCheck is included to implement a "soft" rule of classical music counterpoint
+// A "soft" rule doesn't forbid a particular musical interval, but only permits them sparingly
+// This function allows for the player to use the interval of a 5th or 8th on just one occasion in the midgame
 
 function lifeCheck () {
   if (frogLives === 0) {
     loseScreen()
   }
 }
-  
+
+// makeMove moves the frogs to their new location, based on the player input
+// Valid or not, a complete move will result in the frogs moving upwards by one square
+
 function makeMove (event) {
   frogLocation.push(originalGridWidth.indexOf(event.key))
   if (frogLocation.length === 2) {
@@ -214,17 +240,28 @@ function makeMove (event) {
   }
 }
 
-function playSound (event) {
-  soundArray[originalGridWidth.indexOf(event.key)].play ()
-}
-
-function stopSound (event) {
-  soundArray[originalGridWidth.indexOf(event.key)].pause ()
-}
+// The next three functions determine the appearance of the endScreen.
+// winScreen reveals a smile, loseScreen reveals a frown
+// returnFrogs moves the frogs to the top lilypads so that they look like eyes
+// returnFrogs also makes the rest of the large frog face visible
 
 function winScreen () {
   returnFrogs()
   smile.style.display = 'block'
+}
+
+function loseScreen () {
+  returnFrogs()
+  frown.style.display = 'block'
+}
+
+function returnFrogs () {
+  endScreen.style.display = 'block'
+  frog1.style.left = `${frogMap[0]}px`
+  frog2.style.left = `${frogMap[7]}px`
+  frog1.style.bottom = `${frogMap[6]}px`
+  frog2.style.bottom = `${frogMap[6]}px`
+  frogLocation = []
 }
 
 function calculateTime () {
@@ -233,16 +270,16 @@ function calculateTime () {
   addTopScore (finalTime)
 }
 
-function showTopScores () {
-  let highScoreTable = JSON.parse(localStorage.getItem('highscores')) || 'initialHighScore: 100.0' 
-  if (typeof highScoreTable === 'string') {
-    highScoreTable = highScoreTable.split(',')
-  }
-  for (let i = 0; i < highScoreTable.length; i++) {
-    let position = document.getElementById(`list${i}`)
-    position.innerText = `${highScoreTable[i]}s`
-  }
-}
+// addTopScore retrieves information from local storage (where the top 10 highscores are stored) and compares the latest time to the highscores
+// In local storage, the entire table of highscores is stored as a single key-value pair, which, when retrieved returns as a string
+// The first part of the function turns this string into array called highScoreTable
+// Regexp is used to extract numbers (times) from highScoreTable - these numbers are then put into a new array (highScoreNumbers)
+// The player's time is then compared to the last element in highScoreNumbers, to see if it qualifies for a highscore
+// If they qualify, the player is prompted to add their name, and, along with their time, this information is used to create a new Player object
+// After tidying up its appearance, this object is then added to the highScoreTable array (and the time is added to highScoreNumbers)
+// highScoreNumbers (now containing 11 elements) is sorted from lowest to highest
+// As highScoreNumbers is sorted, highScoreTable is sorted in parallel
+// Finally, the 11th element in the sorted array is popped - the information is then used to update the visual table and also the local storage
 
 function addTopScore (time) {
   let highScoreTable = JSON.parse(localStorage.getItem('highscores')) || 'initialHighScore: 100.0' 
@@ -296,19 +333,20 @@ function addTopScore (time) {
   }
 }
 
-function loseScreen () {
-  returnFrogs()
-  frown.style.display = 'block'
+// showTopScores is included to ensure that the highscores are always visible
+
+function showTopScores () {
+  let highScoreTable = JSON.parse(localStorage.getItem('highscores')) || 'initialHighScore: 100.0' 
+  if (typeof highScoreTable === 'string') {
+    highScoreTable = highScoreTable.split(',')
+  }
+  for (let i = 0; i < highScoreTable.length; i++) {
+    let position = document.getElementById(`list${i}`)
+    position.innerText = `${highScoreTable[i]}s`
+  }
 }
 
-function returnFrogs () {
-  endScreen.style.display = 'block'
-  frog1.style.left = `${frogMap[0]}px`
-  frog2.style.left = `${frogMap[7]}px`
-  frog1.style.bottom = `${frogMap[6]}px`
-  frog2.style.bottom = `${frogMap[6]}px`
-  frogLocation = []
-}
+// getMenu ensures that, when an item from the nav bar is clicked, its contents will become visible, while other content from the nav bar will be hidden
 
 function getMenu (event) {
   event.preventDefault()
@@ -323,11 +361,17 @@ function getMenu (event) {
   }
 }
 
+// hideText is called within the startGame function (ie, when the start button is clicked), and ensures that any content from the nav bar is hidden once the game has started
+
 function hideText () {
   navContent.forEach(item => {
   item.style.display = 'none'
   })
 }
+
+// playDemo is triggered when the "demonstration" button is clicked
+// This function starts the game and also calls the "demoMove" function once per second to simulate a complete randomized run through of the game
+// The removeEventListeners ensure that, while the demonstration is happening, the demonstration can't restarted, nor can the game be started
 
 function playDemo () {
   startGame()
@@ -335,6 +379,12 @@ function playDemo () {
   demonstration.removeEventListener('click', playDemo)
   startButton.removeEventListener('click', startGame)
 }
+
+// demoMove is triggered once per second after the demonstration button is clicked
+// Like checkMove, it calls the changeAvailableKeys function to generate a random set of available keys
+// It creates an array of currentOptions, which includes every possible valid move that could be made
+// Then, it invokes createRandomNumber and randomly selects one option from currentOptions 
+// It assigns that option to the currentMove array, which will be used to instruct the frogs where to move
 
 function demoMove () {
   currentMove = []
@@ -374,18 +424,12 @@ function demoMove () {
   changeAvailableKeys()
 }
 
-function playDemoSound () {
-  currentMove.forEach(item => {
-    soundArray[originalGridWidth.indexOf(item)].play ()
-  })  
-  setTimeout(stopDemoSound, 900)
+function createRandomNumber () {
+  randomNumber = Math.floor(Math.random() * currentOptions.length)
 }
 
-function stopDemoSound () {
-  currentMove.forEach(item => {
-    soundArray[originalGridWidth.indexOf(item)].pause ()
-  }) 
-}
+// demoFrogMove controls the movement of the frogs during the demonstration
+// It is similar to makeMove, but its relation to currentRow is slightly different
 
 function demoFrogMove () {
   if (currentRow < gridHeight) {
@@ -401,8 +445,31 @@ function demoFrogMove () {
   } 
 }
 
-function createRandomNumber () {
-  randomNumber = Math.floor(Math.random() * currentOptions.length)
+// playDemoSound is invoked during demoMove
+// A setTimeout is used to automatically call stopDemoSound after 900ms
+// This is to ensure that, in the event that the same pair of notes are played in the next move, there will still be some audible separation between them
+
+function playDemoSound () {
+  currentMove.forEach(item => {
+    soundArray[originalGridWidth.indexOf(item)].play ()
+  })  
+  setTimeout(stopDemoSound, 900)
+}
+
+function stopDemoSound () {
+  currentMove.forEach(item => {
+    soundArray[originalGridWidth.indexOf(item)].pause ()
+  }) 
+}
+
+// These two functions listen for keydown and keyup respectively, and produce a specific musical note
+
+function playSound (event) {
+  soundArray[originalGridWidth.indexOf(event.key)].play ()
+}
+
+function stopSound (event) {
+  soundArray[originalGridWidth.indexOf(event.key)].pause ()
 }
 
 startButton.addEventListener('click', startGame)
