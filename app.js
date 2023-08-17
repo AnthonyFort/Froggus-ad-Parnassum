@@ -9,6 +9,9 @@ const endScreen = document.getElementById('endscreen') // Displays when the game
 const smile = document.getElementById('smile') // Displays if the player wins
 const frown = document.getElementById('frown') // Displays if the player loses
 
+let  h1 = document.getElementById('h1')
+let livesText = document.getElementById('lives') // This will visually update the number of lives the player has remaining
+
 const gridHeight = 7 // How many rows the grid has
 const originalGridWidth = ['d', 'f', 'g', 'h', 'j', 'k', 'l', ';'] // All the possible keys that could be available in the game
 
@@ -67,6 +70,7 @@ function startGame () {
   grid.innerHTML = ''
   keyGuide.style.display = 'grid' // Makes the grid visible
   grid.style.display = 'grid'
+  h1.innerText = 'FROGGUS AD PARNASSUM!'
   frog1 = document.createElement('div') // Creates the frogs and positions them on the grid
   frog2 = document.createElement('div')
   frog1.classList.add('frog')
@@ -220,6 +224,7 @@ function emptyCurrentMove () {
 // This function allows for the player to use the interval of a 5th or 8th on just one occasion in the midgame
 
 function lifeCheck () {
+  livesText.innerHTML = '🐸'.repeat(frogLives)
   if (frogLives === 0) {
     loseScreen()
   }
@@ -267,6 +272,7 @@ function returnFrogs () {
 function calculateTime () {
   finalTime = stopTime - startTime
   finalTime = parseFloat(finalTime / 1000).toFixed(2)
+  h1.innerText = `Your time was ${finalTime}s!`
   addTopScore (finalTime)
 }
 
