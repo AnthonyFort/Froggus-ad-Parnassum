@@ -297,7 +297,7 @@ function addTopScore (time) {
     return parseFloat(item.match(/\d+\.\d+/))
   })
   if (highScoreTable.length < 10 || time < highScoreNumbers[highScoreNumbers.length - 1]) {
-    let player = prompt('Congratulations! Please enter your name to be added to the leaderboard: ')
+    let player = prompt('Congratulations! Please enter your frog name to be added to the leaderboard: ')
     let newHighScore = new Player (player, time)
     newHighScore = JSON.stringify(newHighScore)
     newHighScore = newHighScore.split('"')
