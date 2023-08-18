@@ -55,7 +55,7 @@ for (let i = 0; i < originalGridWidth.length; i++) {
 
 // Creates <audio> elements and assigns each element a musical note
 
-for (let i = 1; i < 9; i++) {
+for (let i = 1; i <= originalGridWidth.length; i++) {
   let audio = document.createElement('audio')
   audio.src = `note-${i}.m4a`
   soundArray.push(audio)
