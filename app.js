@@ -306,15 +306,10 @@ function addTopScore (time) {
     })
     newHighScore = newHighScore.toString()
     newHighScore = newHighScore.replace(',', ': ')
-    highScoreTable = JSON.parse(localStorage.getItem('highscores')) || 'initialHighScore: 100.0' 
-    if (typeof highScoreTable === 'string') {
-      highScoreTable = highScoreTable.split(',')
-    }
     highScoreTable.push(newHighScore)
     highScoreNumbers = highScoreTable.map(item => {
       return parseFloat(item.match(/\d+\.\d+/))
     })
-
     let numberHolder
     let allInfoHolder
     for (let i = 0; i < highScoreNumbers.length; i++) {
