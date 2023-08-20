@@ -22,7 +22,7 @@ In the middle rows, there is more choice, but there are still constraints. Gener
 
 To encourage quick thinking (which is an important skill in the mastery of musical improvisation), players are timed from the moment they play the first move. The top ten fastest times are added to a leaderboard.
 
-## Document and Reflecting on the Planning Process
+## Documenting and Reflecting on the Planning Process
 
 In preparation for this project, I produced a five-and-a-half-page planning document for my instructors to review, which is reproduced as an appendix to this README. In this plan, I fleshed out the concept of the game, using wireframes made on figma.com. I also anticipated various technical challenges and provided initial normal-language solutions for them. 
 
