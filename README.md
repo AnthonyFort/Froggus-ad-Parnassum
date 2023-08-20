@@ -424,7 +424,7 @@ The game begins as soon as the player makes their first move. In classic Frogger
 
 Example 2: Frogs will automatically be moved up every second or so. The player chooses which square to put the frogs by pressing a particular key.
 
-![Picture of the grid where each 8-square row is filled in with the letters A-K from the qwerty keyboard]
+![Picture of the grid where each 8-square row is filled in with the letters A-K from the qwerty keyboard] (screenshots-from-plan/plan1.png)
 
 Let’s look at an example of a journey these frogs might make:
 
