@@ -414,3 +414,120 @@ In Froggus ad Parnassum, we will “leapfrog to greatness” by harnessing the a
 
 ## Concept in Detail 
 
+Example 1: The goal is to transport two frogs from one end to the other. 
+
+![Picture of the basic grid with arrows pointing showing the direction of the frogs' movement]
+
+In classic Frogger, your goal is to safely transport one frog from the bottom of the screen to the top of the screen. In Froggus ad Parnassum, you have to transport two frogs, controlling one with each hand. 
+
+The game begins as soon as the player makes their first move. In classic Frogger, you can use the arrow keys to move up, down, left, or right. In Froggus ad Parnassum, the controls are a bit different. The frogs will be moved upwards automatically every second or so. Before then, for each go, the player must press two keys from the following array: ASDFGHJK. You will notice that these 8 keys form a horizontal row on your keyboard. The two keys tell frogs which square to occupy in the next row. A new lily pad will appear, and the frogs can hop on safely. Because they belong to an array, each key will have an index number - the key with the lower index number will be assigned to the left-hand frog, while the key with the higher-index number will be assigned to the higher frog.
+
+Example 2: Frogs will automatically be moved up every second or so. The player chooses which square to put the frogs by pressing a particular key.
+
+![Picture of the grid where each 8-square row is filled in with the letters A-K from the qwerty keyboard]
+
+Let’s look at an example of a journey these frogs might make:
+
+Example 3: A possible journey for our frogs. For each numbered row, try pressing the two keys at the same time. Notice how it’s a bit like playing a piano piece with two hands.
+
+![Picture showing one solution to the game]
+
+Let’s analyse these moves in a bit more detail. First of all, notice how the game starts and ends with [A, K]. If you count the squares from A to K inclusive, you will count 8. This is deliberate - in classical music, a span of 8 spaces is called an octave, and in Fuxian counterpoint, we always begin and end with an octave.
+
+Now let’s count distances between the keys on each successive row (again, counting inclusively). You will find that, without exception, each pair of keys is either 3 squares or 6 squares apart. In classical music, we call these spans intervals, and, in Fuxian counterpoint, the rule is that, when you’re in the middle of a musical phrase, the interval must be a “3rd” (3) or a “6th” (6). In other words, our frogs must always be 3 or 6 squares apart from each other. 
+
+Now, if that was all there was to this game, the game would be pretty easy, and pretty boring. For example, you could just do the following:
+
+Example 4: A boring solution
+
+![Picture of a boring solution]
+
+To address this, let’s add a new feature to the game. For every row, let’s randomly assign some sharks to different squares. Now the frogs have to dodge that shark, or else they’re going to be eaten.
+
+Example 5: Randomly assigned sharks that need to be avoided
+
+![Picture of randomly-assigned shark squares]
+
+Example 6: A solution that avoids the sharks
+
+![Picture demonstrating a new solutiont to the game]
+
+That’s almost all the basics, except for one more thing: every time the frogs move onto their new squares, two sounds will play. Those sounds will be musical notes - the very notes you would hear if you actually played this pattern on a musical keyboard. Congratulations, you are now playing classical music!
+
+## Technical Challenges
+
+### Making a Move
+
+For each move, the player must select two elements from an array - [A, S, D, F, G, H, J, K]. Whether or not their move is valid depends on the distance (the musical interval) between these two elements. This can be determined by subtracting the index of the larger element from that of the lower one. Remember, apart from the beginning and the end, we need the frogs to be separated by a musical interval of a 3rd or a 6th. Slightly confusingly, because musical intervals count inclusively, we have to subtract one to get the actual distance between musical notes. In other words, musical notes that are a “6th” apart are actually just 5 notes apart, counting the normal way. Therefore, the valid distances between frogs are 2 and 5 during the middle of the game, and 7 for the beginning and end. 
+
+For example, given the array [A, S, D, F, G, H, J, K], suppose a player selects the keys D and K in the middle of the game, we can use the indexOf array method to find their respective indices (1, 6). Then, we subtract the larger from the smaller, and if the answer is 5 or 2, the move is valid.
+
+It turns out that, for an array of 8 elements, there are 9 valid moves:
+
+[A, D]
+[S, F]
+[D, G]
+[F, H]
+[G, J]
+[H, K]
+[A, H]
+[S, J]
+[D, K]
+
+As a result, all Javascript needs to do, is check whether or not one of these combinations has been executed by the player.
+
+### Winning the Game
+
+Given a grid of height 7, the player must make 7 correct moves in order to win. For each move, they will only have a short amount of time to make their decision. If the player succeeds, the game could be regenerated in such a way as to introduce new challenges.
+
+The game could be made harder by: 
+
+1. Introducing more sharks, including surprise sharks that only emerge mid-game
+2. Reducing the amount of thinking time
+3. Lengthening the grid to demand concentration for longer lengths of time
+4. Widening the grid to create the possibility for more varied solutions
+
+Related to point 4, it should be noted that the rules described above are somewhat simplified from the actual rules set by Fux. In fact, although intervals 3rds and 6ths are strongly favoured, 5ths and 8ths are also permitted when necessary. In harder levels, we could allow players to uses 5ths and 8ths, but set a condition such that the frogs’ “health” is diminished whenever they do so. If a frogs’ health diminishes too much, they will die and the game will be over.
+
+### Listening For Two Keys at Once
+
+As much as possible, we want the experience of this game to simulate the experience of playing a musical keyboard in real time. Therefore, it really matters when the player plays the keys. If we didn’t care about simulating a musical experience, we could simply ask the player to press the keys one at a time, and then calculate their distance after that. However, to simulate playing a musical keyboard, we want, for each move, the player to play the two chosen keys at the same time.
+
+Realistically, no two key presses are ever exactly simultaneous. One will come just before the other, and the player won’t know which came first. Our code needs to accommodate for these discrepancies and leave a reasonable margin for error. The margin for error needs to be big enough to catch nearly-simultaneous key presses, but fall below the threshold for what is audibly detectable by a human listener. 
+
+Suppose we set an initial threshold of 20ms. This means that after the first key is pressed, the second key must be pressed within the next 20ms, or the move will be invalid. We can use a conditional to check whether or not this condition has been met. 
+
+Now suppose the first key to be pressed down is ‘A’. Looking at the 9 sub arrays above, we can see that A belongs to [A, D] and [A, H]. In other words, given that ‘A’ has just been pressed, we now know that ‘D’ or ‘H’ must follow.
+
+Given, that the array is quite small, we can hard-code the conditionals for each key in advance. In other words, we can tell JavaScript which keys must follow from an initial key press:
+
+A — D, H
+S — F, J
+D — A, D, K
+F — S, H
+G — D, J
+H — A, F, K
+J — G, L
+K — D, H
+
+### Holding the Keys Down
+
+When someone plays a musical keyboard, they typically press down a key, hold that key for a certain amount of time (to sustain the sound), and then release it. This is different from typing, where we typically release the key as soon as we have pressed up. How can we encourage the player to hold the key down like a musical key, and how can write code that will respond to this appropriately?
+
+To solve this, we can add a metronome feature. Suppose the player has two seconds for each move. Let’s set a metronome at 60 bpm (1 beat per second), which is to say they have two musical beats per move. In order to play in time (like a musician), we need them to start playing at the very start of each two-second window (again, allowing a small margin for error). To achieve this, the player must think ahead, planning their next move while executing the current one (an important musical skill). 
+
+A background metronome sound can be triggered at the onset of the game, and kept in time using the setInterval() method.
+
+Then, we want to make sure they hold the keys down for at least one second before lifting them up. We can use the Date getTime() method to do this. By deducting the time of the ‘keydown’ even from the time of the ‘keyup’ event, we can check that the result is >=1000ms. If it isn’t the game is over.
+
+### Creating the Sharks
+
+The grid height represents time, with each new row representing a new move and a new stage in the frogs’ journey. Given a grid height, a number of sharks can be randomly assigned to positions on the grid. One way to think of this is that particular keys in the keys array are now invalid. In other words, certain conditionals are set for each stage. For each stage, a filter method could be used to generate a smaller array from the original array, removing any keys that match with where the sharks are.
+
+If we wanted to have sharks suddenly appear mid-game, we could, say, ensure that the function containing the filter method only triggers once a certain stage has been reached. For example, we could wait until the player is on stage 3 to execute the filter that will decide on the size of the array for stage 5. This could be combined with an initial setup which introduces a certain amount of sharks from the get-go. 
+
+### Ensuring There is Always a Solution
+
+Perhaps the biggest challenge is ensuring that, no matter where the sharks are placed, there is always at least one move that the player can make. To ensure this, we have to check that there is always at least one of the valid sub arrays remaining after the arrays have been reduced by the filter method. In other words, the filter method needs to be designed so that it always leave at least one option from the sub array.
+
+
