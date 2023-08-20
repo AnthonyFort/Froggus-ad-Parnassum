@@ -10,7 +10,7 @@ In classic Frogger, the aim of the game is to move one frog from one end of the 
 
 Part of Fux’s Gradus ad Parnassum takes the student through a series of exercises in a topic called ‘counterpoint.’ Counterpoint trains the student to think carefully about which musical note to play alongside another musical note. Suppose you’re playing the piano and you play one note in the right hand and another note simultaneously in the left. The musical effect you create from the combination of those two notes will vary depending on how wide apart those notes are from one another. Counterpoint trains the student to follow certain rules that are central to the classical music style. Fux arranged his exercises into levels called ‘species’. Froggus ad Parnassum simulates the first level, or ‘first species counterpoint.’ The following sequence of screenshots walks through a possible winning play:
 
-![Sequence of screenshots walks through a possible winning play]
+![Sequence of screenshots walks through a possible winning play](readme-picture.png)
 
 Each frog begins on a lily pad, then leaps into the water, dodging sharks on every row until they reach the last two sets of lily pads on the other side. In the original Frogger, the player can move the frog both vertically and horizontally. In Froggus ad Parnassum, the frogs will automatically be moved up one row with each new move. The player’s job is to decide where they are positioned horizontally, using the key guide above the grid to help them. 
 
