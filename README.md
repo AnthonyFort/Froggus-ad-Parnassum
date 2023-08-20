@@ -1,4 +1,4 @@
-# Froggus-ad-Parnassum
+# Froggus ad Parnassum
 
 ## Introduction
 
