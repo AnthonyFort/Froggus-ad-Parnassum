@@ -424,13 +424,13 @@ The game begins as soon as the player makes their first move. In classic Frogger
 
 Example 2: Frogs will automatically be moved up every second or so. The player chooses which square to put the frogs by pressing a particular key.
 
-![Picture of the grid where each 8-square row is filled in with the letters A-K from the qwerty keyboard] 
+![Picture of the grid where each 8-square row is filled in with the letters A-K from the qwerty keyboard](screenshots-from-plan/plan2.png) 
 
 Let’s look at an example of a journey these frogs might make:
 
 Example 3: A possible journey for our frogs. For each numbered row, try pressing the two keys at the same time. Notice how it’s a bit like playing a piano piece with two hands.
 
-![Picture showing one solution to the game]
+![Picture showing one solution to the game](screenshots-from-plan/plan3.png)
 
 Let’s analyse these moves in a bit more detail. First of all, notice how the game starts and ends with [A, K]. If you count the squares from A to K inclusive, you will count 8. This is deliberate - in classical music, a span of 8 spaces is called an octave, and in Fuxian counterpoint, we always begin and end with an octave.
 
@@ -440,17 +440,17 @@ Now, if that was all there was to this game, the game would be pretty easy, and 
 
 Example 4: A boring solution
 
-![Picture of a boring solution]
+![Picture of a boring solution](screenshots-from-plan/plan4.png)
 
 To address this, let’s add a new feature to the game. For every row, let’s randomly assign some sharks to different squares. Now the frogs have to dodge that shark, or else they’re going to be eaten.
 
 Example 5: Randomly assigned sharks that need to be avoided
 
-![Picture of randomly-assigned shark squares]
+![Picture of randomly-assigned shark squares](screenshots-from-plan/plan5.png)
 
 Example 6: A solution that avoids the sharks
 
-![Picture demonstrating a new solutiont to the game]
+![Picture demonstrating a new solutiont to the game](screenshots-from-plan/plan6.png)
 
 That’s almost all the basics, except for one more thing: every time the frogs move onto their new squares, two sounds will play. Those sounds will be musical notes - the very notes you would hear if you actually played this pattern on a musical keyboard. Congratulations, you are now playing classical music!
 
