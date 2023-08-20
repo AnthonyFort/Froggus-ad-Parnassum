@@ -27,3 +27,21 @@ In preparation for this project, I produced a five-and-a-half-page planning docu
 Ultimately, the final concept remained the same as the plan, except for one subtle but significant difference. In the planning stages, I wanted to build the game such that the player was forced to play “in time”, by following either a visual or audio metronome. The motivation behind this was that I wanted to simulate musical playing as much as possible, and keeping good time is, of course, an important aspect of playing musically. However, even though I did in fact build a function to encourage metronomic playing, I ended up discarding it and replacing it with a ‘high score’ feature that encouraged players not to play metronomically but instead to complete the game as quickly as possible. Not only did I find this more fun (and more addictive), but I felt it could also help develop another important musical skill, which is the ability to think ahead and to think quickly.
 
 On the coding front, technical challenges I had anticipated and discussed in the plan for the most part had solutions that were broadly similar to the ones I had outlined, although, in practice, these solutions often turned out to be more complex (and interesting!) than I had expected. Some of these solutions will be discussed in more detail below.
+
+## Key Features
+
+### The Musical Keyboard
+
+The key guide that was placed above the grid (see above) is a copy of an 8-element ‘originalGridWidth’ array that I initialised as a constant at the start of my JavaScript document: 
+
+originalGridWidth = [‘d’, ‘f’, ‘g’, ‘h’, ‘j’, ‘k’, ‘l’, ‘;’]
+
+Separately, I made audio recordings of 8 musical notes and used a for loop to push them into an array called ‘soundArray’:
+
+```
+for (let i = 1; i <= originalGridWidth.length; i++) {
+  let audio = document.createElement('audio')
+  audio.src = `note-${i}.m4a`
+  soundArray.push(audio)
+}
+```
