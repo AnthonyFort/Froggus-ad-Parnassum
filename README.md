@@ -416,7 +416,7 @@ In Froggus ad Parnassum, we will “leapfrog to greatness” by harnessing the a
 
 Example 1: The goal is to transport two frogs from one end to the other. 
 
-![Picture of the basic grid with arrows pointing showing the direction of the frogs' movement]
+![Picture of the basic grid with arrows pointing showing the direction of the frogs' movement](screenshots-from-plan/plan1.png)
 
 In classic Frogger, your goal is to safely transport one frog from the bottom of the screen to the top of the screen. In Froggus ad Parnassum, you have to transport two frogs, controlling one with each hand. 
 
@@ -424,7 +424,7 @@ The game begins as soon as the player makes their first move. In classic Frogger
 
 Example 2: Frogs will automatically be moved up every second or so. The player chooses which square to put the frogs by pressing a particular key.
 
-![Picture of the grid where each 8-square row is filled in with the letters A-K from the qwerty keyboard] (screenshots-from-plan/plan1.png)
+![Picture of the grid where each 8-square row is filled in with the letters A-K from the qwerty keyboard] 
 
 Let’s look at an example of a journey these frogs might make:
 
